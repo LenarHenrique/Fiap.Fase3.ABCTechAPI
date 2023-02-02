@@ -1,6 +1,7 @@
 package br.com.fiap.abctechapi.controller;
 
 import br.com.fiap.abctechapi.component.VersionComponent;
+import br.com.fiap.abctechapi.model.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class HealthCheckController {
     }
 
     @GetMapping("version")
-    public ResponseEntity<String> version() throws IOException {
+    public ResponseEntity<Version> version() throws IOException {
         return ResponseEntity.ok(this.component.getProjectVersio());
     }
 }

@@ -1,5 +1,6 @@
 package br.com.fiap.abctechapi.component;
 
+import br.com.fiap.abctechapi.model.Version;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -22,10 +23,8 @@ public class VersionComponent {
         prop.load(imput);
         return prop.getProperty("build.name");
     }
-    public String getProjectVersio() throws IOException {
-        Properties prop = new Properties();
-        InputStream imput = getClass().getClassLoader().getResourceAsStream("application.yml");
-        prop.load(imput);
-        return prop.getProperty("build.name") + ": " + prop.getProperty("build.version");
+    public Version getProjectVersio() throws IOException {
+        Version version = new Version(getProjectName(), getVersion());
+        return version;
     }
 }
