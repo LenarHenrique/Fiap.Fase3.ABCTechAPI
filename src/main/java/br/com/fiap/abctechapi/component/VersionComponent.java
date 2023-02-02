@@ -23,7 +23,6 @@ public class VersionComponent {
     }
 
     public String getVersion()  {
-        Properties prop = new Properties();
         return this.prop.getProperty("build.version");
     }
 
