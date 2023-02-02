@@ -1,5 +1,7 @@
 package br.com.fiap.abctechapi.controller;
 
+import br.com.fiap.abctechapi.component.VersionComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +14,11 @@ import java.util.Properties;
 @RestController
 @RequestMapping("/")
 public class HealthCheckController {
+    private VersionComponent component;
+    public HealthCheckController(@Autowired VersionComponent component){
+        this.component = component;
+
+    }
 
     @GetMapping
     public ResponseEntity<Object> status(){
@@ -20,9 +27,6 @@ public class HealthCheckController {
 
     @GetMapping("version")
     public ResponseEntity<String> version() throws IOException {
-        Properties prop = new Properties();
-        InputStream imput = getClass().getClassLoader().getResourceAsStream("application.yml");
-        prop.load(imput);
-        return ResponseEntity.ok(prop.getProperty("build.name") + ": " + prop.getProperty("build.version"));
+        return ResponseEntity.ok(this.component.getProjectVersio());
     }
 }
