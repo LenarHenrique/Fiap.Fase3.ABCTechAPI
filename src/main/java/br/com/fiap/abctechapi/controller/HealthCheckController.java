@@ -27,7 +27,7 @@ public class HealthCheckController {
     }
 
     @GetMapping("version")
-    public ResponseEntity<Version> version() throws IOException {
+    public ResponseEntity<Version> version()  {
         return ResponseEntity.ok(this.component.getProjectVersio());
     }
 }

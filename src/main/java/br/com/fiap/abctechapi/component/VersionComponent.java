@@ -10,20 +10,27 @@ import java.util.Properties;
 @Component
 public class VersionComponent {
 
-    public String getVersion() throws IOException {
-        Properties prop = new Properties();
-        InputStream imput = getClass().getClassLoader().getResourceAsStream("application.yml");
-        prop.load(imput);
-        return prop.getProperty("build.version");
+    private Properties prop;
+    public VersionComponent(){
+        this.prop = new Properties();
+
+        try{
+            InputStream imput = getClass().getClassLoader().getResourceAsStream("application.yml");
+            prop.load(imput);
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
     }
 
-    public String getProjectName() throws IOException {
+    public String getVersion()  {
         Properties prop = new Properties();
-        InputStream imput = getClass().getClassLoader().getResourceAsStream("application.yml");
-        prop.load(imput);
-        return prop.getProperty("build.name");
+        return this.prop.getProperty("build.version");
     }
-    public Version getProjectVersio() throws IOException {
+
+    public String getProjectName()  {
+        return this.prop.getProperty("build.name");
+    }
+    public Version getProjectVersio()  {
         Version version = new Version(getProjectName(), getVersion());
         return version;
     }
