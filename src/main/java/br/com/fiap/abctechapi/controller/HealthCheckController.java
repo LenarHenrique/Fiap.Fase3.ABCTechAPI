@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
 @RestController
 @RequestMapping("/")
 public class HealthCheckController {
@@ -28,6 +24,6 @@ public class HealthCheckController {
 
     @GetMapping("version")
     public ResponseEntity<Version> version()  {
-        return ResponseEntity.ok(this.component.getProjectVersio());
+        return ResponseEntity.ok(this.component.getProjectVersion());
     }
 }
