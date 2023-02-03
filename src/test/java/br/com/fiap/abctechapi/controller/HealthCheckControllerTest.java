@@ -30,7 +30,7 @@ public class HealthCheckControllerTest {
     public void whenInvokeVersionMethodThenReturnResponseEntityOk(){
         Version expectedVersion = new Version("","1.0.0");
 
-        when(component.getProjectVersio()).thenReturn(expectedVersion);
+        when(component.getProjectVersion()).thenReturn(expectedVersion);
 
         assertEquals(ResponseEntity.ok(expectedVersion), healthCheckController.version());
     }
