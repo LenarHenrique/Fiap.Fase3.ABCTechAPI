@@ -25,7 +25,7 @@ public class VersionComponentTest {
 
     @Test
     public void whenInvokeGetVersionMethodThenReturnCorrectVerion(){
-        String expectedVersion = "0.0.3";
+        String expectedVersion = "1.0";
         when(properties.getProperty(eq("build.version"))).thenReturn(expectedVersion);
 
         assertEquals(expectedVersion, versionComponent.getVersion());
@@ -33,7 +33,7 @@ public class VersionComponentTest {
 
     @Test
     public void whenInvokeGetProjectNameMethodThenReturnCorrectProjectName(){
-        String expectedProjectName = "abcTechApi";
+        String expectedProjectName = "abc-tech-api";
 
         when(properties.getProperty(eq("build.name"))).thenReturn(expectedProjectName);
 
