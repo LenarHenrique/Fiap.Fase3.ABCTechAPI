@@ -1,13 +1,16 @@
 package br.com.fiap.abctechapi.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 
 @Entity
 @Data
-@Table(name = "Assistances")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "assistances")
 public class Assist {
 
     @Id
