@@ -25,7 +25,7 @@ public class VersionComponentTest {
 
     @Test
     public void whenInvokeGetVersionMethodThenReturnCorrectVerion(){
-        String expectedVersion = "1.0.0";
+        String expectedVersion = "0.0.3";
         when(properties.getProperty(eq("build.version"))).thenReturn(expectedVersion);
 
         assertEquals(expectedVersion, versionComponent.getVersion());

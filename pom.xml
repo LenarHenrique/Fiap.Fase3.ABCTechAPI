@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.fiap</groupId>
-	<artifactId>abctechapi</artifactId>
+	<artifactId>abcTechApi</artifactId>
 	<version>0.0.3</version>
 	<packaging>war</packaging>
 	<name>abctechapi</name>
@@ -59,6 +59,10 @@
 			<version>8.0.32</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+		</dependency>
 
 
 		<dependency>
