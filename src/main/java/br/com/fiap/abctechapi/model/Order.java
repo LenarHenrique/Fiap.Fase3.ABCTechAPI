@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
+    private final int MIN_ASSISTS_GT = 0;
+    private final int MAX_ASSISTS = 15;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +36,13 @@ public class Order {
     private OrderLocation endOrderLocation;
 
     public boolean hasMinAssists(){
-        return services.size() > 0;
+        return services.size() > MIN_ASSISTS_GT;
     }
 
     public boolean exceedsMaxAssists(){
-        return  services.size() > 15;
+        return  services.size() > MAX_ASSISTS;
     }
+
+
 
 }
