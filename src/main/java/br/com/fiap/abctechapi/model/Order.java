@@ -13,7 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order {
+    @Transient
     private final int MIN_ASSISTS_GT = 0;
+    @Transient
     private final int MAX_ASSISTS = 15;
 
     @Id

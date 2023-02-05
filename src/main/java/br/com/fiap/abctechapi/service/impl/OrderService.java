@@ -8,11 +8,12 @@ import br.com.fiap.abctechapi.repository.AssistRepository;
 import br.com.fiap.abctechapi.repository.OrderRepository;
 import br.com.fiap.abctechapi.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
+@Service
 public class OrderService implements IOrderService {
 
     private OrderRepository orderRepository;
@@ -31,7 +32,7 @@ public class OrderService implements IOrderService {
     public void saveOrder(Order order, List<Long> arrayAssists) throws Exception {
         ArrayList<Assist> assistArrayList = new ArrayList<>();
 
-        if(arrayAssists.size() > order.getMIN_ASSISTS_GT()){
+        if(!(arrayAssists.size() > order.getMIN_ASSISTS_GT())){
             throw new MinAssistsException("Invalid assists", "Adicione ao menos uma assistencia");
         }
         if(arrayAssists.size() > order.getMAX_ASSISTS()){
