@@ -27,6 +27,8 @@ public class Order {
     private Long operatorId;
 
     @ManyToMany
+    @JoinColumn(name = "service_id", foreignKey = @ForeignKey(name = "FK01_service_id"))
+    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(name = "FK02_order_id"))
     private List<Assist> services;
 
     @OneToOne(cascade = CascadeType.PERSIST)

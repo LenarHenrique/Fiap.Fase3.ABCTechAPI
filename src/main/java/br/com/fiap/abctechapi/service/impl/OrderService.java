@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class OrderService implements IOrderService {
@@ -32,14 +34,18 @@ public class OrderService implements IOrderService {
     public void saveOrder(Order order, List<Long> arrayAssists) throws Exception {
         ArrayList<Assist> assistArrayList = new ArrayList<>();
 
-        if(!(arrayAssists.size() > order.getMIN_ASSISTS_GT())){
+        Set<Long> setAssists = new HashSet<>(arrayAssists);
+        ArrayList<Long> uniqueAssists = new ArrayList<Long>();
+        uniqueAssists.addAll(setAssists);
+
+        if(!(uniqueAssists.size() > order.getMIN_ASSISTS_GT())){
             throw new MinAssistsException("Invalid assists", "Adicione ao menos uma assistencia");
         }
-        if(arrayAssists.size() > order.getMAX_ASSISTS()){
+        if(uniqueAssists.size() > order.getMAX_ASSISTS()){
             throw new MaxAssistsException("Invalid assists", "Numero maximo de assistencias excedido!");
         }
 
-        arrayAssists.forEach( i -> {
+        uniqueAssists.forEach( i -> {
             Assist auxAssist = assistRepository.findById(i).orElseThrow();
             assistArrayList.add(auxAssist);
         });
