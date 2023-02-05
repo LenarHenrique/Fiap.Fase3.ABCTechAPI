@@ -40,11 +40,16 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorMessageResponse> requestArgumentNotValid(MethodArgumentNotValidException exception){
+        final String[] message = {""};
+        exception.getAllErrors().forEach(err -> {
+            message[0] = message[0] + (" | " + err.getDefaultMessage());
+        });
+
         ErrorMessageResponse error = new ErrorMessageResponse(
                 HttpStatus.BAD_REQUEST.value(),
                 new Date(),
-                exception.getMessage(),
-                "Objeto passado não é valido"
+                "Objeto passado não é valido!",
+                message[0]
         );
 
         return new ResponseEntity<ErrorMessageResponse>(error, HttpStatus.BAD_REQUEST);
