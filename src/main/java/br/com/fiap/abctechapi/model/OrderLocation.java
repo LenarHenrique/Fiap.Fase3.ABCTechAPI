@@ -1,0 +1,25 @@
+package br.com.fiap.abctechapi.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "orders_location")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class OrderLocation {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    private Double latitude;
+    private Double longitude;
+    private Date date;
+}
