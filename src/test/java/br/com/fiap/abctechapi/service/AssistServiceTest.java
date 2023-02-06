@@ -4,10 +4,10 @@ package br.com.fiap.abctechapi.service;
 import br.com.fiap.abctechapi.model.Assist;
 import br.com.fiap.abctechapi.repository.AssistRepository;
 import br.com.fiap.abctechapi.service.impl.AssistServiceImpl;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,16 +24,16 @@ public class AssistServiceTest {
     private AssistService assistService;
 
     @BeforeEach
-    public void init(){
+    void init() {
         MockitoAnnotations.openMocks(this);
         assistService = new AssistServiceImpl(assistRepository);
     }
 
-    @DisplayName("Teste Lista Sucesso com 2 valores")
+    @DisplayName("Testando retorno lista com sucesso com 2 itens")
     @Test
-    public void list_success(){
-        Assist assist = new Assist(1L, "teste","desc");
-        Assist assist2 = new Assist(2L, "teste 2","desc 2");
+    void list_success(){
+        Assist assist = new Assist(1L, "Test", "Description Test");
+        Assist assist2 = new Assist(2L, "Test 2", "Description Test 2");
 
         when(assistRepository.findAll()).thenReturn(List.of(assist, assist2));
 
@@ -44,7 +44,7 @@ public class AssistServiceTest {
         Assertions.assertEquals(values.get(1).getId(), assist2.getId());
     }
 
-    @DisplayName("Teste de Lista vazia")
+    @DisplayName("Testando retorno lista vazia")
     @Test
     void empty_list(){
         when(assistRepository.findAll()).thenReturn(List.of());
