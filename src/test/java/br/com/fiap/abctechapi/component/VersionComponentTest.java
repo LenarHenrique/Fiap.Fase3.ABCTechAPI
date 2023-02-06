@@ -1,8 +1,8 @@
 package br.com.fiap.abctechapi.component;
 
 import br.com.fiap.abctechapi.model.Version;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,8 +17,8 @@ public class VersionComponentTest {
     private VersionComponent versionComponent;
     private Properties properties;
 
-    @Before
-    public void before(){
+    @BeforeEach
+    public void init(){
         properties = mock(Properties.class);
         versionComponent = new VersionComponent(properties);
     }
