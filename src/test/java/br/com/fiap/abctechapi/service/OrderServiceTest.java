@@ -6,18 +6,20 @@ import br.com.fiap.abctechapi.model.Assist;
 import br.com.fiap.abctechapi.model.Order;
 import br.com.fiap.abctechapi.repository.AssistRepository;
 import br.com.fiap.abctechapi.repository.OrderRepository;
-import br.com.fiap.abctechapi.service.IOrderService;
 import br.com.fiap.abctechapi.service.impl.OrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class OrderServiceTest {
@@ -58,7 +60,7 @@ public class OrderServiceTest {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
 
-        Assertions.assertThrows(MinAssistsException.class, () -> orderService.saveOrder(newOrder, List.of()));
+        assertThrows(MinAssistsException.class, () -> orderService.saveOrder(newOrder, List.of()));
         verify(orderRepository, times(0)).save(newOrder);
 
     }
@@ -68,8 +70,48 @@ public class OrderServiceTest {
         Order newOrder = new Order();
         newOrder.setOperatorId(1234L);
 
-        Assertions.assertThrows(MaxAssistsException.class, () -> orderService.saveOrder(newOrder, List.of(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L,12L,13L,14L,15L,16L)));
+        assertThrows(MaxAssistsException.class, () -> orderService.saveOrder(newOrder, List.of(1L,2L,3L,4L,5L,6L,7L,8L,9L,10L,11L,12L,13L,14L,15L,16L)));
         verify(orderRepository, times(0)).save(newOrder);
     }
 
+    @Test
+    public void whenOrderHasMinAssistsThenThrowErrorOfMinAssistsException() throws Exception{
+        Order newOrder = Mockito.spy(Order.class);
+        newOrder.setOperatorId(1234L);
+        newOrder.setServices(Collections.emptyList());
+
+        when(assistRepository.findById(any())).
+                thenReturn(Optional.of(new Assist(1L, "Teste", "Description Test")));
+
+        when(newOrder.hasMinAssists()).thenReturn(false);
+
+        MinAssistsException exception = assertThrows(MinAssistsException.class, () -> {
+            orderService.saveOrder(newOrder, List.of(1L));
+        });
+
+        verify(orderRepository, times(0)).save(newOrder);
+        assertEquals("Invalid assists", exception.getMessage());
+        assertEquals("Adicione ao menos uma assistencia!", exception.getDescription());
+    }
+
+    @Test
+    public void whenOrderExceedsMaxAssistsThenThrowErrorOfMaxAssistsException(){
+        Order newOrder = Mockito.spy(Order.class);
+        newOrder.setOperatorId(1234L);
+        newOrder.setServices(Collections.emptyList());
+
+        when(assistRepository.findById(any())).
+                thenReturn(Optional.of(new Assist(1L, "Teste", "Description Test")));
+
+        when(newOrder.hasMinAssists()).thenReturn(true);
+        when(newOrder.exceedsMaxAssists()).thenReturn(true);
+
+        MaxAssistsException exception = assertThrows(MaxAssistsException.class, () -> {
+            orderService.saveOrder(newOrder, List.of(1L));
+        });
+
+        verify(orderRepository, times(0)).save(newOrder);
+        assertEquals("Invalid assists", exception.getMessage());
+        assertEquals("Numero maximo de assistencias excedido!", exception.getDescription());
+    }
 }
