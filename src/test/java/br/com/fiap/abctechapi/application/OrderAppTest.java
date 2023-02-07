@@ -6,8 +6,7 @@ import br.com.fiap.abctechapi.service.impl.OrderService;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Collections;
-
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.*;
 
 public class OrderAppTest {
@@ -28,7 +27,7 @@ public class OrderAppTest {
         OrderLocationDTO end = new OrderLocationDTO();
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setAssists(Collections.singletonList(1L));
+        orderDTO.setAssists(singletonList(1L));
         orderDTO.setOperatorId(1L);
         orderDTO.setStart(start);
         orderDTO.setEnd(end);
@@ -43,11 +42,7 @@ public class OrderAppTest {
 
         OrderLocationDTO end = new OrderLocationDTO();
 
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setAssists(Collections.singletonList(1L));
-        orderDTO.setOperatorId(1L);
-        orderDTO.setStart(null);
-        orderDTO.setEnd(end);
+        OrderDTO orderDTO = new OrderDTO(1L, singletonList(1L), null, end);
 
         orderApp.createOrder(orderDTO);
 
@@ -60,7 +55,7 @@ public class OrderAppTest {
         OrderLocationDTO start = new OrderLocationDTO();
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setAssists(Collections.singletonList(1L));
+        orderDTO.setAssists(singletonList(1L));
         orderDTO.setOperatorId(1L);
         orderDTO.setStart(start);
         orderDTO.setEnd(null);
@@ -74,7 +69,7 @@ public class OrderAppTest {
     public void whenCreateOrderMethodInvokedAndStartAndEndNullThenShouldCallMethodSaveOrder() throws Exception {
 
         OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setAssists(Collections.singletonList(1L));
+        orderDTO.setAssists(singletonList(1L));
         orderDTO.setOperatorId(1L);
         orderDTO.setStart(null);
         orderDTO.setEnd(null);
