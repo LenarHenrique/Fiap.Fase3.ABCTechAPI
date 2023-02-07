@@ -3,8 +3,10 @@ package br.com.fiap.abctechapi.application;
 import br.com.fiap.abctechapi.application.dto.OrderDTO;
 import br.com.fiap.abctechapi.application.dto.OrderLocationDTO;
 import br.com.fiap.abctechapi.service.impl.OrderService;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import java.util.Date;
 
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.*;
@@ -14,7 +16,7 @@ public class OrderAppTest {
     private OrderApp orderApp;
     private OrderService orderService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         orderService = mock(OrderService.class);
         orderApp = new OrderApp(orderService);
@@ -24,13 +26,9 @@ public class OrderAppTest {
     public void whenCreateOrderMethodInvokedThenShouldCallMethodSaveOrder() throws Exception {
 
         OrderLocationDTO start = new OrderLocationDTO();
-        OrderLocationDTO end = new OrderLocationDTO();
+        OrderLocationDTO end = new OrderLocationDTO(Double.valueOf("0"), Double.valueOf("0"), new Date());
 
-        OrderDTO orderDTO = new OrderDTO();
-        orderDTO.setAssists(singletonList(1L));
-        orderDTO.setOperatorId(1L);
-        orderDTO.setStart(start);
-        orderDTO.setEnd(end);
+        OrderDTO orderDTO = new OrderDTO(1L, singletonList(1L),start, end );
 
         orderApp.createOrder(orderDTO);
 

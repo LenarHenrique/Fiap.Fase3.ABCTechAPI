@@ -3,14 +3,14 @@ package br.com.fiap.abctechapi.controller;
 import br.com.fiap.abctechapi.application.AssistApp;
 import br.com.fiap.abctechapi.application.dto.AssistDTO;
 import br.com.fiap.abctechapi.application.interfaces.IAssistApp;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,7 +20,7 @@ public class AssistControllerTest {
 
     private IAssistApp iAssistApp;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         iAssistApp = mock(AssistApp.class);
         assistController = new AssistController(iAssistApp);

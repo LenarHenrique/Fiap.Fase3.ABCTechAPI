@@ -2,14 +2,15 @@ package br.com.fiap.abctechapi.application;
 
 import br.com.fiap.abctechapi.model.Assist;
 import br.com.fiap.abctechapi.service.AssistService;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AssistAppTest {
 
@@ -17,7 +18,7 @@ public class AssistAppTest {
 
     private AssistService assistService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         assistService = mock(AssistService.class);
         assistApp = new AssistApp(assistService);

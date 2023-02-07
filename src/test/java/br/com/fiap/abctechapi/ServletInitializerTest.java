@@ -1,17 +1,17 @@
 package br.com.fiap.abctechapi;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ServletInitializerTest {
 
     private ServletInitializer servletInitializer;
 
 
-    @Before
+    @BeforeEach
     public void setUp(){
         servletInitializer = new ServletInitializer();
     }
@@ -20,6 +20,6 @@ public class ServletInitializerTest {
     public void whenConfigureMethodInvokedThenReturnOneSource() {
         SpringApplicationBuilder springApplicationBuilder = servletInitializer.configure(new SpringApplicationBuilder());
 
-        assertEquals(1,  springApplicationBuilder.build().getAllSources().size());
+        assertEquals(1, springApplicationBuilder.build().getAllSources().size());
     }
 }

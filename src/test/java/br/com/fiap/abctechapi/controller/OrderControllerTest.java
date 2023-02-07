@@ -3,11 +3,11 @@ package br.com.fiap.abctechapi.controller;
 import br.com.fiap.abctechapi.application.OrderApp;
 import br.com.fiap.abctechapi.application.dto.OrderDTO;
 import br.com.fiap.abctechapi.application.interfaces.IOrderApp;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
 public class OrderControllerTest {
@@ -16,7 +16,7 @@ public class OrderControllerTest {
 
     private IOrderApp orderApp;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         orderApp = mock(OrderApp.class);
         orderController = new OrderController(orderApp);
@@ -26,6 +26,6 @@ public class OrderControllerTest {
     public void whenSaveOrderControllerInvokedThenReturnCorrectResponseEntity() throws Exception {
        ResponseEntity<?> responseEntity = orderController.saveOrder(new OrderDTO());
 
-        Assert.assertEquals(ResponseEntity.ok().build(), responseEntity);
+        assertEquals(ResponseEntity.ok().build(), responseEntity);
     }
 }
