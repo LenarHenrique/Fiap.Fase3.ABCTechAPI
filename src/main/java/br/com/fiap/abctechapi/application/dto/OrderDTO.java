@@ -1,6 +1,5 @@
 package br.com.fiap.abctechapi.application.dto;
 
-import br.com.fiap.abctechapi.model.OrderLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
