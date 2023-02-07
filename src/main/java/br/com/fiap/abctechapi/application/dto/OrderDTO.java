@@ -3,6 +3,7 @@ package br.com.fiap.abctechapi.application.dto;
 import br.com.fiap.abctechapi.model.OrderLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class OrderDTO {
     @NotNull
     @Positive
