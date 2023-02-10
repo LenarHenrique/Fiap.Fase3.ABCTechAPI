@@ -2,8 +2,8 @@ package br.com.fiap.abctechapi.controller;
 
 import br.com.fiap.abctechapi.component.VersionComponent;
 import br.com.fiap.abctechapi.model.Version;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,7 +15,7 @@ public class HealthCheckControllerTest {
     private HealthCheckController healthCheckController;
     private VersionComponent component;
 
-    @Before
+    @BeforeEach
     public void before(){
         component = mock(VersionComponent.class);
         healthCheckController = new HealthCheckController(component);
